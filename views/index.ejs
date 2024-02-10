@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Url Shortner Project</title>
+  </head>
+  <body>
+    <h1>Url Shortner</h1>
+    <form action="/shorten" method="post" onsubmit="return validateUrl()">
+      <input
+        type="text"
+        name="longUrl"
+        id="longUrlInput"
+        placeholder="enter URL"
+        required
+      />
+      <button type="submit">Submit</button>
+      <div id="urlError" style="color: red"></div>
+    </form>
+    <div>
+      <h4>Click to copy url</h4>
+      <% if (shortUrl){ %>
+      <h2><%= shortUrl %></h2>
+      <% } %>
+    </div>
+    <script>
+      function validateUrl() {
+        let urlInput = document.getElementById("longUrlInput").value;
+        let urlPattern =
+          /^(http[s]?:\/\/www\.|http[s]?:\/\/|www\.)[^.]+\.[^.]+/;
+        let errorDiv = document.getElementById("urlError");
+
+        if (urlPattern.test(urlInput)) {
+          errorDiv.textContent = "";
+          return true;
+        } else {
+          errorDiv.textContent = "Enter correct url";
+          return false;
+        }
+      }
+    </script>
+  </body>
+</html>
